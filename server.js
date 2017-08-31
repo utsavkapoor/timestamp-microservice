@@ -7,7 +7,9 @@
 
 var fs = require('fs');
 var express = require('express');
+var api = require('./views/api.js')
 var app = express();
+var port = process.env.PORT || 30001;
 
 if (!process.env.DISABLE_XORIGIN) {
   app.use(function(req, res, next) {
@@ -22,21 +24,17 @@ if (!process.env.DISABLE_XORIGIN) {
   });
 }
 
-app.use('/public', express.static(process.cwd() + '/public'));
+app.use('/public', express.static(process.cwd() + '/public'));// Whats this ??
 
-app.route('/_api/package.json')
-  .get(function(req, res, next) {
-    console.log('requested');
-    fs.readFile(__dirname + '/package.json', function(err, data) {
-      if(err) return next(err);
-      res.type('txt').send(data.toString());
-    });
-  });
   
-app.route('/')
+app.route('/')// Better design is to make this into a seperate folder so that functionality is easily seen
     .get(function(req, res) {
 		  res.sendFile(process.cwd() + '/views/index.html');
-    })
+    });
+
+api(app);
+
+// We have to Write a GET request here for the actual API. 
 
 // Respond not found to all the wrong routes
 app.use(function(req, res, next){
@@ -53,7 +51,7 @@ app.use(function(err, req, res, next) {
   }  
 })
 
-app.listen(process.env.PORT, function () {
-  console.log('Node.js listening ...');
+app.listen(port, function () {// Any Port in "or" if there is no port mentioned in the 
+  console.log("Server is running on the following port:" + port);
 });
 
