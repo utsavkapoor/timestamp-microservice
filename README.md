@@ -21,9 +21,8 @@
         <p><span>https://ts-microservice.glitch.me/12-15-2015</span></p>
         <p><span>https://ts-microservice.glitch.me/15-12-2015</span></p>
         <p><span>https://ts-microservice.glitch.me/1450137600</span></p>
-        
         <h2>Example output:</h2>
-        <p><span>{ "unix": 1450137600, "natural": "December 15, 2015" }</span></p>
+        <p><span>{"unix": 1450137600, "natural": "December 15, 2015"}</span></p>
       </div>
    </body>
 
